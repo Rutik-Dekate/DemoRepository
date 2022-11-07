@@ -19,7 +19,7 @@ LastModified By :- Rutik Dekate
 public class AccountValidateAndColseCaseHandler {
 
     //Adding comment to test repository
-    
+    //Adding comment to develop branch
     //Validation on Account
     public static void accountValidationMethod(List<Account> accList){
         Map<Id, Account> accValiMap = new Map<Id, Account>([Select Id, (Select Id, Status from Cases where Status = 'Escalated') from Account where Id IN : AccList]);
