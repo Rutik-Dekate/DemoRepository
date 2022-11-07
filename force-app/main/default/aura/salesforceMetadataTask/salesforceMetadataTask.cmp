@@ -1,0 +1,47 @@
+<aura:component controller="salesforceMetadataTaskController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="valuesobj" type="List" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="selectedFieldValue" type="List" default="[]"/>
+    <aura:attribute name="optionsForField" type="List" default="[]"/>
+    <aura:attribute name="separatedlist" type="String" />
+    <aura:attribute name="objectNameattri" type="String" />
+    <aura:attribute name="createdQuery" type="String" />
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="values" type="List" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    <lightning:select name="Objects" 
+                      label="Select object:" 
+                      value="{!v.selectedValue}" 
+                      onchange="{!c.fetchAllFields}" >
+        <aura:iteration items="{!v.valuesobj}" var="objectname">
+            <option value="{!objectname}" text="{!objectname}" />  
+        </aura:iteration>
+    </lightning:select>
+    
+    <lightning:dualListbox name="multipleOptions"  
+                           aura:id="objectFieldId" 
+                           label= "Select Fields" 
+                           sourceLabel="Available" 
+                           selectedLabel="Selected" 
+                           options="{!v.optionsForField}" 
+                           value="{!v.selectedFieldValue}"
+                           onchnge="{!c.selectedFieldChange}"/>
+    
+    <lightning:button variant="brand" label="Query" title="Brand action" onclick="{!c.queryCreator}" />
+    
+    <lightning:textarea name="input3" value="{!v.createdQuery}" label="Textarea field with a placeholder" placeholder="type here..."/>
+    
+    <lightning:button variant="brand" label="getRecord" title="Brand action" onclick="{!c.getRecordTable}" />
+    
+	<div style="height: 300px">
+        <lightning:datatable
+                keyField="id"
+                data="{!v.data}"
+                columns="{!v.columns}"
+                hideCheckboxColumn="true"/>
+    </div>
+</aura:component>
