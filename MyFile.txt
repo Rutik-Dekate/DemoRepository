@@ -1,2 +1,0 @@
-Hi,
-We learnt how to create a branch.
